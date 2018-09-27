@@ -98,4 +98,35 @@ public class EmptyUtil {
 	public static boolean isNotObjEmpty(Object obj) {
 		return !isObjEmpty(obj);
 	}
+	
+	/**
+	 * string为空判断
+	 * @Title: isStrEmpty   
+	 * @Description: string为空判断
+	 * @param str
+	 * @return
+	 */
+	public static boolean isStrEmpty(String str){
+		int strLen;
+        if (str == null || (strLen = str.length()) == 0) {
+            return true;
+        }
+        for (int i = 0; i < strLen; i++) {
+            if ((Character.isWhitespace(str.charAt(i)) == false)) {
+                return false;
+            }
+        }
+        return true;
+	}
+	
+	/**
+	 * string不为空判断
+	 * @Title: isNotStrEmpty   
+	 * @Description: string不为空判断  
+	 * @param str
+	 * @return
+	 */
+	public static boolean isNotStrEmpty(String str){
+		return !isStrEmpty(str);
+	}
 }

@@ -10,7 +10,6 @@ import java.io.PrintWriter;
 import java.io.RandomAccessFile;
 import java.net.InetAddress;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.net.PrintCommandListener;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
@@ -24,6 +23,8 @@ import org.apache.commons.net.io.CopyStreamListener;
 import org.apache.commons.net.util.TrustManagerUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.cszt.cloud.util.EmptyUtil;
 
 /**
  * 
@@ -162,7 +163,7 @@ public class FtpClient implements IFtpClient {
 		if (controlKeepAliveReplyTimeout >= 0) {
 			ftp.setControlKeepAliveReplyTimeout(controlKeepAliveReplyTimeout);
 		}
-		if (StringUtils.isNotBlank(charset)) {
+		if (EmptyUtil.isNotStrEmpty(charset)) {
 			ftp.setControlEncoding(charset);
 		}
 		ftp.setConnectTimeout(connectTimeout);
@@ -184,7 +185,7 @@ public class FtpClient implements IFtpClient {
 				ftp.disconnect();
 				throw new FtpException("FTP server refused connection." + serverMessage);
 			}
-			if (StringUtils.isBlank(username)) {// 用户为空，使用默认用户和密码
+			if (EmptyUtil.isStrEmpty(username)) {// 用户为空，使用默认用户和密码
 				username = "anonymous";
 				password = System.getProperty("user.name") + "@" + InetAddress.getLocalHost().getHostName();
 			}
@@ -248,12 +249,12 @@ public class FtpClient implements IFtpClient {
 	public boolean createDirecroty(String remote) throws FtpException {
 		FTPClient ftp = null;
 		try {
-			if (StringUtils.isBlank(remote)) {
+			if (EmptyUtil.isStrEmpty(remote)) {
 				logger.warn("CreateDirecroty error! Remote Direcroty is blank!");
 				return false;
 			}
 			ftp = getFTPClient();
-			if (StringUtils.isBlank(systemType)) {
+			if (EmptyUtil.isStrEmpty(systemType)) {
 				initSystemType(ftp);
 			}
 			String split = getSeparatorChar();
@@ -304,7 +305,7 @@ public class FtpClient implements IFtpClient {
 	 * @throws FtpException
 	 */
 	public String getSystemType() throws FtpException {
-		if (StringUtils.isBlank(systemType)) {
+		if (EmptyUtil.isStrEmpty(systemType)) {
 			initSystemType();
 		}
 		return systemType;
@@ -322,7 +323,7 @@ public class FtpClient implements IFtpClient {
 	 * @throws FtpException
 	 */
 	public String getSeparatorChar() throws FtpException {
-		if (StringUtils.isBlank(separatorChar)) {
+		if (EmptyUtil.isStrEmpty(separatorChar)) {
 			initSystemType();
 		}
 		return separatorChar;
@@ -342,7 +343,7 @@ public class FtpClient implements IFtpClient {
 
 	private void initSystemType(FTPClient ftp) throws IOException {
 		systemType = ftp.getSystemType();
-		if (StringUtils.indexOf(systemType, "UNIX") != -1) {
+		if (systemType.indexOf("UNIX") != -1) {
 			separatorChar = "/";
 		} else {
 			separatorChar = "\\";
@@ -493,7 +494,8 @@ public class FtpClient implements IFtpClient {
 			if (resume && localFile.exists()) {
 				long localSize = localFile.length();
 				if (localSize > remoteSize) {
-					throw new Exception("Local file " + local + " size grant than Remote file " + remote + " .Please check!");
+					throw new Exception(
+							"Local file " + local + " size grant than Remote file " + remote + " .Please check!");
 				}
 				ftp.setRestartOffset(localSize);
 				output = new FileOutputStream(localFile, Boolean.TRUE);
