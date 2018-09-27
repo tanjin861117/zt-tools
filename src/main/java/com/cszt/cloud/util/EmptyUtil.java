@@ -1,5 +1,6 @@
 package com.cszt.cloud.util;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +27,7 @@ public class EmptyUtil {
 	 * @param map
 	 * @return
 	 */
-	public static boolean isMapEmpty(Map map) {
+	public static boolean isEmpty(Map map) {
 		if (map != null && !map.isEmpty()) {
 			return false;
 		}
@@ -41,8 +42,8 @@ public class EmptyUtil {
 	 * @param map
 	 * @return
 	 */
-	public static boolean isNotMapEmpty(Map map) {
-		return !isMapEmpty(map);
+	public static boolean isNotEmpty(Map map) {
+		return !isEmpty(map);
 	}
 
 	/**
@@ -53,7 +54,7 @@ public class EmptyUtil {
 	 * @param list
 	 * @return
 	 */
-	public static boolean isListEmpty(List list) {
+	public static boolean isEmpty(List list) {
 		if (list != null && list.size() > 0) {
 			return false;
 		}
@@ -68,8 +69,8 @@ public class EmptyUtil {
 	 * @param list
 	 * @return
 	 */
-	public static boolean isNotListEmpty(List list) {
-		return !isListEmpty(list);
+	public static boolean isNotEmpty(List list) {
+		return !isEmpty(list);
 	}
 
 	/**
@@ -80,7 +81,7 @@ public class EmptyUtil {
 	 * @param obj
 	 * @return
 	 */
-	public static boolean isObjEmpty(Object obj) {
+	public static boolean isEmpty(Object obj) {
 		if (obj == null) {
 			return true;
 		}
@@ -95,8 +96,8 @@ public class EmptyUtil {
 	 * @param obj
 	 * @return
 	 */
-	public static boolean isNotObjEmpty(Object obj) {
-		return !isObjEmpty(obj);
+	public static boolean isNotEmpty(Object obj) {
+		return !isEmpty(obj);
 	}
 	
 	/**
@@ -106,7 +107,7 @@ public class EmptyUtil {
 	 * @param str
 	 * @return
 	 */
-	public static boolean isStrEmpty(String str){
+	public static boolean isEmpty(String str){
 		int strLen;
         if (str == null || (strLen = str.length()) == 0) {
             return true;
@@ -126,7 +127,61 @@ public class EmptyUtil {
 	 * @param str
 	 * @return
 	 */
-	public static boolean isNotStrEmpty(String str){
-		return !isStrEmpty(str);
+	public static boolean isNotEmpty(String str){
+		return !isEmpty(str);
 	}
+	
+	/**
+	 * string不为空判断
+	 * @Title: isNotStrEmpty   
+	 * @Description: string不为空判断  
+	 * @param str
+	 * @return
+	 */
+	public static boolean isNotEmpty(String... str){
+		for(String s : str){
+			if(isEmpty(s)){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	 /**
+	  * 集合为空判断
+	  * @Title: isEmpty   
+	  * @Description: 集合为空判断  
+	  * @param col
+	  * @return
+	  */
+    public final static boolean isEmpty(Collection col) {
+        return col == null || col.isEmpty();
+    }
+
+    /**
+     * 集合不为空判断
+     * @Title: isNotEmpty   
+     * @Description: 集合不为空判断  
+     * @param cols
+     * @return
+     */
+    public final static boolean isNotEmpty(Collection... cols) {
+        for (Collection c : cols) {
+            if (isEmpty(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    /**
+     * 集合不为空判断
+     * @Title: isNotEmpty   
+     * @Description: 集合不为空判断  
+     * @param cols
+     * @return
+     */
+    public final static boolean isNotEmpty(Collection cols) {
+        return !isEmpty(cols);
+    }
 }

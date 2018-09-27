@@ -311,7 +311,7 @@ public class HttpClient {
 	public String post(String url, String charset, Map<String, String> formMap, Map<String, String> headerMap)
 			throws Exception {
 		String data = "";
-		if (EmptyUtil.isNotMapEmpty(formMap)) {
+		if (EmptyUtil.isNotEmpty(formMap)) {
 			data = formMap.entrySet().stream().map(entry -> String.format("%s=%s", entry.getKey(), entry.getValue()))
 					.collect(Collectors.joining("&"));
 		}
@@ -565,7 +565,7 @@ public class HttpClient {
 	private String execute(HttpBuild httpBuild) throws Exception {
 		String url = httpBuild.getUrl();
 		Request.Builder builder = new Request.Builder();
-		if (EmptyUtil.isNotMapEmpty(httpBuild.getQueryMap())) {
+		if (EmptyUtil.isNotEmpty(httpBuild.getQueryMap())) {
 			String queryParams = httpBuild.getQueryMap().entrySet().stream()
 					.map(entry -> String.format("%s=%s", entry.getKey(), entry.getValue()))
 					.collect(Collectors.joining("&"));
@@ -574,7 +574,7 @@ public class HttpClient {
 
 		builder.url(url);
 
-		if (EmptyUtil.isNotMapEmpty(httpBuild.getHeaderMap())) {
+		if (EmptyUtil.isNotEmpty(httpBuild.getHeaderMap())) {
 			httpBuild.getHeaderMap().forEach(builder::addHeader);
 		}
 
