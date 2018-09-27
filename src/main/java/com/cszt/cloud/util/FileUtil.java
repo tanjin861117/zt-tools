@@ -203,6 +203,40 @@ public class FileUtil {
 		File file = new File(filePath);
 		return makeDirectory(file);
 	}
+	
+	/**
+	 * 创建文件支持多级目录
+	 * @Title: createFiles   
+	 * @Description: 创建文件支持多级目录  
+	 * @param filePath
+	 * @return
+	 */
+    public static boolean createFiles(String filePath) {
+        File file = new File(filePath);
+        File dir = file.getParentFile();
+        if (!dir.exists()) {
+            if (dir.mkdirs()) {
+                try {
+                    return file.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * 创建多级目录
+     * @Title: createPaths   
+     * @Description: 创建多级目录  
+     * @param paths
+     * @return
+     */
+    public static boolean createPaths(String paths) {
+        File dir = new File(paths);
+        return !dir.exists() && dir.mkdir();
+    }
 
 	/**
 	 * 得到文件后缀名
