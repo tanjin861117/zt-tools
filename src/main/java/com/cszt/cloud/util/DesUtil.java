@@ -80,7 +80,7 @@ public class DesUtil {
      * @return
      * @throws Exception
      */
-    public static String encoderByDES(String text, String key) throws Exception {
+    public static String encoder(String text, String key) throws Exception {
         if (text == null || key == null) {
             throw new IllegalArgumentException("text is " + text + " key is " + key);
         }
@@ -99,7 +99,7 @@ public class DesUtil {
      * @return
      * @throws Exception
      */
-    public static String decoderByDES(String secretText, String key) throws Exception {
+    public static String decoder(String secretText, String key) throws Exception {
         if (secretText == null || key == null) {
             throw new IllegalArgumentException("secretText is " + secretText + " key is " + key);
         }

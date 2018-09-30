@@ -69,7 +69,7 @@ public class RandomUtil {
 		StringBuffer sb = new StringBuffer();
 		Random random = new Random();
 		for (int i = 0; i < length; i++) {
-			sb.append(ALLCHAR.charAt(random.nextInt(LETTERCHAR.length())));
+			sb.append(LETTERCHAR.charAt(random.nextInt(LETTERCHAR.length())));
 		}
 		return sb.toString();
 	}

@@ -71,7 +71,7 @@ public class ZIPUtil {
 	 */
 	public final static void unCompress(File source, String path) throws IOException {
 		ZipEntry zipEntry = null;
-		FileUtil.createPaths(path);
+		FileUtil.createFiles(path);
 		// 实例化ZipFile，每一个zip压缩文件都可以表示为一个ZipFile
 		// 实例化一个Zip压缩文件的ZipInputStream对象，可以利用该类的getNextEntry()方法依次拿到每一个ZipEntry对象
 		try (ZipFile zipFile = new ZipFile(source);

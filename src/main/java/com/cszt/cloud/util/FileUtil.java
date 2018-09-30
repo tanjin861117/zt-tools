@@ -44,6 +44,7 @@ public class FileUtil {
 			String readLine = null;
 			while ((readLine = br.readLine()) != null) {
 				sb.append(readLine);
+				sb.append("\n");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -163,7 +164,7 @@ public class FileUtil {
 	}
 
 	/**
-	 * 判断文件夹是否存在
+	 * 判断文件是否存在
 	 * 
 	 * @Title: isExist
 	 * @Description: 判断文件夹是否存在
@@ -233,9 +234,11 @@ public class FileUtil {
      * @param paths
      * @return
      */
-    public static boolean createPaths(String paths) {
+    public static void createPaths(String paths) {
         File dir = new File(paths);
-        return !dir.exists() && dir.mkdir();
+        if(!dir.exists()){
+        	dir.mkdir();
+        }
     }
 
 	/**
